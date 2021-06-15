@@ -1,6 +1,6 @@
-import { Grid, Page, Sort, Filter, Group, ContextMenu, Toolbar } from '@syncfusion/ej2-grids';
+import { Grid, Page, Sort, Filter, Group, ContextMenu, Toolbar, VirtualScroll } from '@syncfusion/ej2-grids';
 import { data } from './datasource';
-Grid.Inject(Page, Sort, Filter, Group, ContextMenu, Toolbar);
+Grid.Inject(Page, Sort, Filter, Group, ContextMenu, Toolbar, VirtualScroll);
 
 let grid: Grid = new Grid({
     dataSource: data,
@@ -18,9 +18,12 @@ let grid: Grid = new Grid({
     allowSorting: true,
     allowSelection: true,
     contextMenuItems: ['Copy'],
-    toolbar: ['Search']
+    toolbar: ['Search'],
+    enableVirtualization: true,
+    enableColumnVirtualization: true,
+    height: 500,
     //allowPaging: true,
-    //pageSettings: { pageSize: 7 }
+    pageSettings: { pageSize: 7 }
 });
 
 grid.appendTo('#Grid');
