@@ -1,6 +1,6 @@
-import { Grid, Page, Sort } from '@syncfusion/ej2-grids';
+import { Grid, Page, Sort, Filter, Group } from '@syncfusion/ej2-grids';
 import { data } from './datasource';
-Grid.Inject(Page, Sort);
+Grid.Inject(Page, Sort, Filter, Group);
 
 let grid: Grid = new Grid({
     dataSource: data,
@@ -10,6 +10,8 @@ let grid: Grid = new Grid({
                 { field: 'Freight', headerText: 'Freight', textAlign: 'Right', width: 120, format: 'C' },
                 { field: 'OrderDate', headerText: 'Order Date', width: 140, format: 'yMd' }
     ],
+    allowGrouping: true,
+    allowFiltering: true,
     allowSorting: true,
     allowPaging: true,
     pageSettings: { pageSize: 7 }
