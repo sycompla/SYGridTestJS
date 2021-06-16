@@ -1,5 +1,7 @@
 import { Grid, Page, Sort, Filter, Group, ContextMenu, Toolbar, VirtualScroll } from '@syncfusion/ej2-grids';
 import { data } from './datasource';
+import { ClickEventArgs } from '@syncfusion/ej2-navigations';
+import { Dialog } from '@syncfusion/ej2-popups';
 Grid.Inject(Page, Sort, Filter, Group, ContextMenu, Toolbar, VirtualScroll);
 
 let grid: Grid = new Grid({
@@ -16,12 +18,26 @@ let grid: Grid = new Grid({
         mode: 'Immediate'
     },
     allowSorting: true,
-    allowSelection: true,
     contextMenuItems: ['Copy'],
-    toolbar: ['Search'],
+    toolbar: ['Search', { text: 'Copy', tooltipText: 'Copy', prefixIcon: 'e-copy', id: 'copy' },
+    { text: 'Copy With Header', tooltipText: 'Copy With Header', prefixIcon: 'e-copy', id: 'copyHeader' }],
+    allowSelection: true,
+    selectionSettings: { type: 'Multiple' },
+    toolbarClick: (args: ClickEventArgs) => {
+        if ( grid.getSelectedRecords().length > 0) {
+            let withHeader: boolean = false;
+            if (args.item.id === 'copyHeader') {
+                withHeader = true;
+            }
+            grid.copy(withHeader);
+        } else {
+            
+        }
+    },
     enableVirtualization: true,
     enableColumnVirtualization: true,
     height: 500,
+    gridLines: "Both",
     //allowPaging: true,
     pageSettings: { pageSize: 7 }
 });
